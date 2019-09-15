@@ -16,11 +16,12 @@ def placeholder_inputs(batch_size, num_pixels, num_classes):
     return images_pl, labels_pl
 
 
-def get_model(images, is_training, num_classes, bn_decay=None):
+def get_model(images, is_training, num_classes, T, bn_decay=None):
     fc1 = tf_util.fully_connected(images, 1200, bn_decay=bn_decay, is_training=is_training, scope='fc1')
     fc2 = tf_util.fully_connected(fc1, 1200, bn_decay=bn_decay, is_training=is_training, scope='fc2')
     fc2 = tf_util.dropout(fc2, is_training=is_training, scope='dp')
     logits = tf_util.fully_connected(fc2, num_classes, bn_decay=bn_decay, is_training=is_training, scope='logits')
+    logits = logits / T
     return logits
 
 

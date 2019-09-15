@@ -38,8 +38,8 @@ T = FLAGS.T
 LOG_DIR = FLAGS.log_dir
 if not os.path.exists(LOG_DIR):
     os.mkdir(LOG_DIR)
-LOG_FOUT = open(os.path.join(LOG_DIR, 'log_train.txt'), 'w')
-SOFT_TARGET_OUT = open(os.path.join(LOG_DIR), 'soft_target.txt', 'w')
+LOG_FOUT = open(os.path.join(LOG_DIR, 'student_log_train.txt'), 'w')
+SOFT_TARGET_OUT = open(os.path.join(LOG_DIR), 'soft_target.txt', 'r')
 LOG_FOUT.write(str(FLAGS) + '\n')
 
 NUM_CLASSES = 10
@@ -52,6 +52,7 @@ BN_DECAY_CLIP = 0.99
 
 # Load ALL data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+soft_labels = np.loadtxt(SOFT_TARGET_OUT)
 
 def log_string(out_str):
     LOG_FOUT.write(out_str + '\n')
@@ -91,7 +92,7 @@ def get_trainable_variables():
 def train():
     with tf.Graph().as_default():
         with tf.device('/gpu:' + str(GPU_INDEX)):
-            images_pl, labels_pl = placeholder_inputs(BATCH_SIZE, NUM_PIXELS, NUM_CLASSES)
+            images_pl, labels_pl, soft_labels_pl = placeholder_inputs(BATCH_SIZE, NUM_PIXELS, NUM_CLASSES)
             is_training_pl = tf.placeholder(tf.bool, shape=())
 
             # Note the global_step=batch parameter to minimize.
@@ -102,7 +103,7 @@ def train():
 
             # Get model and loss
             pred_class = get_model(images_pl, is_training_pl, NUM_CLASSES, T, bn_decay=bn_decay)
-            loss = get_loss(pred_class, labels_pl)
+            loss = get_loss(pred_class, labels_pl, soft_labels_pl, T)
 
             trainables = get_trainable_variables()
 
@@ -141,6 +142,7 @@ def train():
 
         ops = {'images_pl': images_pl,
                'labels_pl': labels_pl,
+               'soft_labels_pl': soft_labels_pl,
                'is_training_pl': is_training_pl,
                'loss': loss,
                'train_op': train_op,
@@ -152,16 +154,13 @@ def train():
             log_string('**** EPOCH %03d ****' % (epoch))
             sys.stdout.flush()
 
-            soft_data = train_one_epoch(sess, ops)
+            train_one_epoch(sess, ops)
             eval_one_epoch(sess, ops)
 
             # Save the variables to disk.
             if epoch % 10 == 0 or epoch == (MAX_EPOCH - 1):
                 save_path = saver.save(sess, os.path.join(LOG_DIR, 'epoch_' + str(epoch) + '.ckpt'))
                 log_string("Model saved in file: %s" % save_path)
-                np.savetxt(SOFT_TARGET_OUT, soft_data)
-                SOFT_TARGET_OUT.flush()
-                SOFT_TARGET_OUT.close()
 
 
 def train_one_epoch(sess, ops):
@@ -178,9 +177,13 @@ def train_one_epoch(sess, ops):
 
     for batch_idx in range(num_batches):
         batch_data, batch_label = mnist.train.next_batch(BATCH_SIZE)
+        start_idx = batch_idx * BATCH_SIZE
+        end_idx = (batch_idx + 1) * BATCH_SIZE
+        batch_soft_label = soft_data[start_idx:end_idx, :]
         feed_dict = {
             ops['images_pl']: batch_data,
             ops['labels_pl']: batch_label,
+            ops['soft_labels_pl']: batch_soft_label,
             ops['is_training_pl']: is_training
         }
         summary, step, _, loss_val, pred_val = sess.run([ops['merged'], ops['step'], ops['train_op'], ops['loss'], ops['pred_class']], feed_dict=feed_dict)
@@ -191,14 +194,9 @@ def train_one_epoch(sess, ops):
         total_seen += BATCH_SIZE
         loss_sum += loss_val
 
-        start_idx = batch_idx * BATCH_SIZE
-        end_idx = (batch_idx + 1) * BATCH_SIZE
-        soft_data[start_idx:end_idx, :] = pred_val
-
     log_string('mean loss: %f' % (loss_sum / float(num_batches)))
     log_string('accuracy: %f' % (total_correct / float(total_seen)))
 
-    return soft_data
 
 
 def eval_one_epoch(sess, ops):
