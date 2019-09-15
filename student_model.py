@@ -12,16 +12,17 @@ def placeholder_inputs(batch_size, num_pixels, num_classes):
 
     images_pl = tf.placeholder(tf.float32, shape=(batch_size, num_pixels))
     labels_pl = tf.placeholder(tf.int32, shape=(batch_size, num_classes))
-    soft_labels_pl = tf.placeholder(tf.int32, shape=(batch_size, num_classes))
+    soft_labels_pl = tf.placeholder(tf.float32, shape=(batch_size, num_classes))
 
     return images_pl, labels_pl, soft_labels_pl
 
 
 def get_model(images, is_training, num_classes, T, bn_decay=None):
-    fc1 = tf_util.fully_connected(images, 800, bn_decay=bn_decay, is_training=is_training, scope='fc1')
-    fc1 = tf_util.dropout(fc1, is_training=is_training, scope='dp')
-    logits = tf_util.fully_connected(fc1, num_classes, bn_decay=bn_decay, is_training=is_training, scope='logits')
-    T = tf.cond(is_training == True, lambda: tf.constant(T), lambda: tf.constant(1.))
+    #fc1 = tf_util.fully_connected(images, 1200, bn_decay=bn_decay, is_training=is_training, scope='fc1')
+    fc2 = tf_util.fully_connected(images, 400, bn_decay=bn_decay, is_training=is_training, scope='fc2')
+    fc2 = tf_util.dropout(fc2, is_training=is_training, scope='dp')
+    logits = tf_util.fully_connected(fc2, num_classes, bn_decay=bn_decay, is_training=is_training, scope='logits')
+    T = tf.cond(tf.cast(is_training, dtype=tf.float32) > 0.5, lambda: tf.constant(T), lambda: tf.constant(1.))
     logits = logits / T
     return logits
 
@@ -34,12 +35,12 @@ def get_loss(image_pred, hard_labels, soft_labels, T):
     image_pred = tf.nn.softmax(image_pred)
     sof_image_log = tf.log(image_pred)
     soft_loss = tf.multiply(soft_labels, sof_image_log)
-    soft_loss = tf.reduce_sum(soft_loss)
+    soft_loss = tf.reduce_mean(soft_loss)
     soft_loss = -1 * soft_loss
 
-    loss = (hard_loss + T * T * soft_loss) / 2
+    loss = (soft_loss + hard_loss) / 2
 
-    return loss
+    return loss, soft_loss, hard_loss
 
 
 

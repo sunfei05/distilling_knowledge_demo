@@ -15,13 +15,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--gpu', type=int, default=0, help='GPU to use [default: GPU 0]')
 parser.add_argument('--log_dir', default='log', help='Log dir [default: log]')
 parser.add_argument('--max_epoch', type=int, default=100, help='Epoch to run [default: 50]')
-parser.add_argument('--batch_size', type=int, default=24, help='Batch Size during training [default: 24]')
+parser.add_argument('--batch_size', type=int, default=1024, help='Batch Size during training [default: 24]')
 parser.add_argument('--learning_rate', type=float, default=0.001, help='Initial learning rate [default: 0.001]')
 parser.add_argument('--momentum', type=float, default=0.9, help='Initial learning rate [default: 0.9]')
 parser.add_argument('--optimizer', default='adam', help='adam or momentum [default: adam]')
 parser.add_argument('--decay_step', type=int, default=300000, help='Decay step for lr decay [default: 300000]')
 parser.add_argument('--decay_rate', type=float, default=0.5, help='Decay rate for lr decay [default: 0.5]')
-parser.add_argument('--T', type=float, default=4, help='Temperature of distilling model')
+parser.add_argument('--T', type=float, default=20., help='Temperature of distilling model')
 
 FLAGS = parser.parse_args()
 
@@ -39,7 +39,7 @@ LOG_DIR = FLAGS.log_dir
 if not os.path.exists(LOG_DIR):
     os.mkdir(LOG_DIR)
 LOG_FOUT = open(os.path.join(LOG_DIR, 'log_train.txt'), 'w')
-SOFT_TARGET_OUT = open(os.path.join(LOG_DIR), 'soft_target.txt', 'w')
+SOFT_TARGET_FILE_PATH = os.path.join(LOG_DIR, 'soft_target.txt')
 LOG_FOUT.write(str(FLAGS) + '\n')
 
 NUM_CLASSES = 10
@@ -159,9 +159,11 @@ def train():
             if epoch % 10 == 0 or epoch == (MAX_EPOCH - 1):
                 save_path = saver.save(sess, os.path.join(LOG_DIR, 'epoch_' + str(epoch) + '.ckpt'))
                 log_string("Model saved in file: %s" % save_path)
+                SOFT_TARGET_OUT = open(SOFT_TARGET_FILE_PATH, 'w')
                 np.savetxt(SOFT_TARGET_OUT, soft_data)
                 SOFT_TARGET_OUT.flush()
                 SOFT_TARGET_OUT.close()
+                log_string("soft target file saved.")
 
 
 def train_one_epoch(sess, ops):
@@ -183,8 +185,8 @@ def train_one_epoch(sess, ops):
             ops['labels_pl']: batch_label,
             ops['is_training_pl']: is_training
         }
-        summary, step, _, loss_val, pred_val = sess.run([ops['merged'], ops['step'], ops['train_op'], ops['loss'], ops['pred_class']], feed_dict=feed_dict)
-        pred_val = np.argmax(pred_val, 1)
+        summary, step, _, loss_val, pred_val0 = sess.run([ops['merged'], ops['step'], ops['train_op'], ops['loss'], ops['pred_class']], feed_dict=feed_dict)
+        pred_val = np.argmax(pred_val0, 1)
         label = np.argmax(batch_label, 1)
         correct = np.sum(pred_val == label)
         total_correct += correct
@@ -193,7 +195,7 @@ def train_one_epoch(sess, ops):
 
         start_idx = batch_idx * BATCH_SIZE
         end_idx = (batch_idx + 1) * BATCH_SIZE
-        soft_data[start_idx:end_idx, :] = pred_val
+        soft_data[start_idx:end_idx, :] = pred_val0
 
     log_string('mean loss: %f' % (loss_sum / float(num_batches)))
     log_string('accuracy: %f' % (total_correct / float(total_seen)))

@@ -9,19 +9,19 @@ import sys
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 import tf_util
-from teacher_model import *
+from student_model import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--gpu', type=int, default=0, help='GPU to use [default: GPU 0]')
 parser.add_argument('--log_dir', default='log', help='Log dir [default: log]')
 parser.add_argument('--max_epoch', type=int, default=100, help='Epoch to run [default: 50]')
-parser.add_argument('--batch_size', type=int, default=24, help='Batch Size during training [default: 24]')
+parser.add_argument('--batch_size', type=int, default=1024, help='Batch Size during training [default: 24]')
 parser.add_argument('--learning_rate', type=float, default=0.001, help='Initial learning rate [default: 0.001]')
 parser.add_argument('--momentum', type=float, default=0.9, help='Initial learning rate [default: 0.9]')
 parser.add_argument('--optimizer', default='adam', help='adam or momentum [default: adam]')
 parser.add_argument('--decay_step', type=int, default=300000, help='Decay step for lr decay [default: 300000]')
 parser.add_argument('--decay_rate', type=float, default=0.5, help='Decay rate for lr decay [default: 0.5]')
-parser.add_argument('--T', type=float, default=4, help='Temperature of distilling model')
+parser.add_argument('--T', type=float, default=20., help='Temperature of distilling model')
 
 FLAGS = parser.parse_args()
 
@@ -39,7 +39,7 @@ LOG_DIR = FLAGS.log_dir
 if not os.path.exists(LOG_DIR):
     os.mkdir(LOG_DIR)
 LOG_FOUT = open(os.path.join(LOG_DIR, 'student_log_train.txt'), 'w')
-SOFT_TARGET_OUT = open(os.path.join(LOG_DIR), 'soft_target.txt', 'r')
+SOFT_TARGET_OUT = open(os.path.join(LOG_DIR, 'soft_target.txt'), 'r')
 LOG_FOUT.write(str(FLAGS) + '\n')
 
 NUM_CLASSES = 10
@@ -52,7 +52,7 @@ BN_DECAY_CLIP = 0.99
 
 # Load ALL data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-soft_labels = np.loadtxt(SOFT_TARGET_OUT)
+soft_labels = np.loadtxt(SOFT_TARGET_OUT, dtype=float)
 
 def log_string(out_str):
     LOG_FOUT.write(out_str + '\n')
@@ -173,13 +173,12 @@ def train_one_epoch(sess, ops):
     total_seen = 0
     loss_sum = 0
 
-    soft_data = np.zeros(shape=(mnist.train.num_examples, NUM_CLASSES))
-
     for batch_idx in range(num_batches):
         batch_data, batch_label = mnist.train.next_batch(BATCH_SIZE)
         start_idx = batch_idx * BATCH_SIZE
         end_idx = (batch_idx + 1) * BATCH_SIZE
-        batch_soft_label = soft_data[start_idx:end_idx, :]
+        batch_soft_label = soft_labels[start_idx:end_idx, :]
+ 
         feed_dict = {
             ops['images_pl']: batch_data,
             ops['labels_pl']: batch_label,
@@ -214,7 +213,8 @@ def eval_one_epoch(sess, ops):
         feed_dict = {
             ops['images_pl']: batch_data,
             ops['labels_pl']: batch_label,
-            ops['is_training_pl']: is_training
+            ops['is_training_pl']: is_training,
+            ops['soft_labels_pl']: np.zeros(shape=(1024,10), dtype=float)
         }
         summary, step, _, loss_val, pred_val = sess.run([ops['merged'], ops['step'], ops['train_op'], ops['loss'], ops['pred_class']],
                                       feed_dict=feed_dict)
