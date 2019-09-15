@@ -25,8 +25,9 @@ def get_model(images, is_training, num_classes, bn_decay=None):
 
 
 def get_loss(image_pred, labels):
-    return tf.nn.softmax_cross_entropy_with_logits(image_pred, labels)
 
+    loss = tf.nn.softmax_cross_entropy_with_logits(logits=image_pred, labels=labels)
+    return tf.reduce_mean(loss)
 
 
 

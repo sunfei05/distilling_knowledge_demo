@@ -152,8 +152,8 @@ def train():
             log_string('**** EPOCH %03d ****' % (epoch))
             sys.stdout.flush()
 
-            train_one_epoch(sess, ops, train_writer)
-            eval_one_epoch(sess, ops, test_writer)
+            train_one_epoch(sess, ops)
+            eval_one_epoch(sess, ops)
 
             # Save the variables to disk.
             if epoch % 10 == 0 or epoch == (MAX_EPOCH - 1):
@@ -179,14 +179,13 @@ def train_one_epoch(sess, ops):
             ops['labels_pl']: batch_label,
             ops['is_training_pl']: is_training
         }
-        loss_val, pred_val = sess.run([ops['merged'], ops['step'], ops['train_op'], ops['loss'], ops['pred_class']], feed_dict=feed_dict)
+        summary, step, _, loss_val, pred_val = sess.run([ops['merged'], ops['step'], ops['train_op'], ops['loss'], ops['pred_class']], feed_dict=feed_dict)
         pred_val = np.argmax(pred_val, 1)
         label = np.argmax(batch_label, 1)
         correct = np.sum(pred_val == label)
         total_correct += correct
         total_seen += BATCH_SIZE
         loss_sum += loss_val
-
     log_string('mean loss: %f' % (loss_sum / float(num_batches)))
     log_string('accuracy: %f' % (total_correct / float(total_seen)))
 
@@ -199,23 +198,23 @@ def eval_one_epoch(sess, ops):
     total_seen = 0
     loss_sum = 0
 
-    num_batches = mnist.valid.num_examples // BATCH_SIZE
+    num_batches = mnist.test.num_examples // BATCH_SIZE
 
     for batch_idx in range(num_batches):
-        batch_data, batch_label = mnist.valid.next_batch(BATCH_SIZE)
+        batch_data, batch_label = mnist.test.next_batch(BATCH_SIZE)
         feed_dict = {
             ops['images_pl']: batch_data,
             ops['labels_pl']: batch_label,
             ops['is_training_pl']: is_training
         }
-        loss_val, pred_val = sess.run([ops['merged'], ops['step'], ops['train_op'], ops['loss'], ops['pred_class']],
+        summary, step, _, loss_val, pred_val = sess.run([ops['merged'], ops['step'], ops['train_op'], ops['loss'], ops['pred_class']],
                                       feed_dict=feed_dict)
         pred_val = np.argmax(pred_val, 1)
         label = np.argmax(batch_label, 1)
         correct = np.sum(pred_val == label)
         total_correct += correct
         total_seen += BATCH_SIZE
-        loss_sum += loss_val
+        loss_sum += (loss_val * BATCH_SIZE)
 
     log_string('eval mean loss: %f' % (loss_sum / float(total_seen)))
     log_string('eval accuracy: %f' % (total_correct / float(total_seen)))

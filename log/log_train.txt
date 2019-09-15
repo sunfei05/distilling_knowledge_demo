@@ -1,0 +1,83 @@
+Namespace(batch_size=24, decay_rate=0.5, decay_step=300000, gpu=0, learning_rate=0.001, log_dir='log', max_epoch=100, momentum=0.9, optimizer='adam')
+**** EPOCH 000 ****
+----
+mean loss: 0.660657
+accuracy: 0.753292
+eval mean loss: 0.562079
+eval accuracy: 0.775341
+Model saved in file: log/epoch_0.ckpt
+**** EPOCH 001 ****
+----
+mean loss: 0.389683
+accuracy: 0.850738
+eval mean loss: 0.309501
+eval accuracy: 0.879107
+**** EPOCH 002 ****
+----
+mean loss: 0.309492
+accuracy: 0.879474
+eval mean loss: 0.284880
+eval accuracy: 0.882812
+**** EPOCH 003 ****
+----
+mean loss: 0.298337
+accuracy: 0.882348
+eval mean loss: 0.274923
+eval accuracy: 0.886118
+**** EPOCH 004 ****
+----
+mean loss: 0.282138
+accuracy: 0.887440
+eval mean loss: 0.256292
+eval accuracy: 0.891927
+**** EPOCH 005 ****
+----
+mean loss: 0.256126
+accuracy: 0.893478
+eval mean loss: 0.249939
+eval accuracy: 0.893630
+**** EPOCH 006 ****
+----
+mean loss: 0.249263
+accuracy: 0.894697
+eval mean loss: 0.249764
+eval accuracy: 0.893329
+**** EPOCH 007 ****
+----
+mean loss: 0.079615
+accuracy: 0.971428
+eval mean loss: 0.012278
+eval accuracy: 0.996695
+**** EPOCH 008 ****
+----
+mean loss: 0.023253
+accuracy: 0.994180
+eval mean loss: 0.013800
+eval accuracy: 0.996695
+**** EPOCH 009 ****
+----
+mean loss: 0.012140
+accuracy: 0.996599
+eval mean loss: 0.003295
+eval accuracy: 0.998898
+**** EPOCH 010 ****
+----
+mean loss: 0.005960
+accuracy: 0.998272
+eval mean loss: 0.001569
+eval accuracy: 0.999599
+Model saved in file: log/epoch_10.ckpt
+**** EPOCH 011 ****
+----
+mean loss: 0.005425
+accuracy: 0.998381
+eval mean loss: 0.000879
+eval accuracy: 0.999700
+**** EPOCH 012 ****
+----
+mean loss: 0.004295
+accuracy: 0.998600
+eval mean loss: 0.000733
+eval accuracy: 0.999599
+**** EPOCH 013 ****
+----
