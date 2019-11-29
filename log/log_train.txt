@@ -1,0 +1,623 @@
+Namespace(T=20.0, batch_size=1024, decay_rate=0.5, decay_step=300000, gpu=0, learning_rate=0.001, log_dir='log', max_epoch=100, momentum=0.9, optimizer='adam')
+**** EPOCH 000 ****
+----
+mean loss: 0.905937
+accuracy: 0.773677
+eval mean loss: 0.312124
+eval accuracy: 0.909831
+Model saved in file: log/epoch_0.ckpt
+soft target file saved.
+**** EPOCH 001 ****
+----
+mean loss: 0.283013
+accuracy: 0.918171
+eval mean loss: 0.215760
+eval accuracy: 0.939019
+**** EPOCH 002 ****
+----
+mean loss: 0.207552
+accuracy: 0.940853
+eval mean loss: 0.156271
+eval accuracy: 0.954861
+**** EPOCH 003 ****
+----
+mean loss: 0.159316
+accuracy: 0.954028
+eval mean loss: 0.112140
+eval accuracy: 0.967882
+**** EPOCH 004 ****
+----
+mean loss: 0.128602
+accuracy: 0.962522
+eval mean loss: 0.098983
+eval accuracy: 0.970378
+**** EPOCH 005 ****
+----
+mean loss: 0.107616
+accuracy: 0.968934
+eval mean loss: 0.087364
+eval accuracy: 0.972222
+**** EPOCH 006 ****
+----
+mean loss: 0.097329
+accuracy: 0.971882
+eval mean loss: 0.073748
+eval accuracy: 0.977105
+**** EPOCH 007 ****
+----
+mean loss: 0.087091
+accuracy: 0.974683
+eval mean loss: 0.065039
+eval accuracy: 0.980577
+**** EPOCH 008 ****
+----
+mean loss: 0.080505
+accuracy: 0.976415
+eval mean loss: 0.062492
+eval accuracy: 0.981445
+**** EPOCH 009 ****
+----
+mean loss: 0.072491
+accuracy: 0.978681
+eval mean loss: 0.054765
+eval accuracy: 0.983724
+**** EPOCH 010 ****
+----
+mean loss: 0.067460
+accuracy: 0.980966
+eval mean loss: 0.053315
+eval accuracy: 0.985677
+Model saved in file: log/epoch_10.ckpt
+soft target file saved.
+**** EPOCH 011 ****
+----
+mean loss: 0.063494
+accuracy: 0.981869
+eval mean loss: 0.048029
+eval accuracy: 0.986437
+**** EPOCH 012 ****
+----
+mean loss: 0.058981
+accuracy: 0.982938
+eval mean loss: 0.046442
+eval accuracy: 0.986111
+**** EPOCH 013 ****
+----
+mean loss: 0.057403
+accuracy: 0.983730
+eval mean loss: 0.043054
+eval accuracy: 0.987630
+**** EPOCH 014 ****
+----
+mean loss: 0.054186
+accuracy: 0.985075
+eval mean loss: 0.040865
+eval accuracy: 0.989366
+**** EPOCH 015 ****
+----
+mean loss: 0.051171
+accuracy: 0.985296
+eval mean loss: 0.039779
+eval accuracy: 0.989258
+**** EPOCH 016 ****
+----
+mean loss: 0.049901
+accuracy: 0.985702
+eval mean loss: 0.037703
+eval accuracy: 0.989475
+**** EPOCH 017 ****
+----
+mean loss: 0.051102
+accuracy: 0.985610
+eval mean loss: 0.037123
+eval accuracy: 0.989800
+**** EPOCH 018 ****
+----
+mean loss: 0.048306
+accuracy: 0.986089
+eval mean loss: 0.037130
+eval accuracy: 0.989692
+**** EPOCH 019 ****
+----
+mean loss: 0.047198
+accuracy: 0.986733
+eval mean loss: 0.036872
+eval accuracy: 0.991102
+**** EPOCH 020 ****
+----
+mean loss: 0.046041
+accuracy: 0.987323
+eval mean loss: 0.033181
+eval accuracy: 0.992188
+Model saved in file: log/epoch_20.ckpt
+soft target file saved.
+**** EPOCH 021 ****
+----
+mean loss: 0.046053
+accuracy: 0.987102
+eval mean loss: 0.035576
+eval accuracy: 0.991319
+**** EPOCH 022 ****
+----
+mean loss: 0.043751
+accuracy: 0.987876
+eval mean loss: 0.033014
+eval accuracy: 0.991211
+**** EPOCH 023 ****
+----
+mean loss: 0.046051
+accuracy: 0.986899
+eval mean loss: 0.036857
+eval accuracy: 0.991102
+**** EPOCH 024 ****
+----
+mean loss: 0.041755
+accuracy: 0.988558
+eval mean loss: 0.031114
+eval accuracy: 0.992622
+**** EPOCH 025 ****
+----
+mean loss: 0.045118
+accuracy: 0.987342
+eval mean loss: 0.032489
+eval accuracy: 0.991862
+**** EPOCH 026 ****
+----
+mean loss: 0.041113
+accuracy: 0.988963
+eval mean loss: 0.032702
+eval accuracy: 0.992188
+**** EPOCH 027 ****
+----
+mean loss: 0.041529
+accuracy: 0.988705
+eval mean loss: 0.031886
+eval accuracy: 0.992188
+**** EPOCH 028 ****
+----
+mean loss: 0.043540
+accuracy: 0.987950
+eval mean loss: 0.033006
+eval accuracy: 0.991970
+**** EPOCH 029 ****
+----
+mean loss: 0.042690
+accuracy: 0.988079
+eval mean loss: 0.032774
+eval accuracy: 0.991970
+**** EPOCH 030 ****
+----
+mean loss: 0.041732
+accuracy: 0.988244
+eval mean loss: 0.032096
+eval accuracy: 0.992079
+Model saved in file: log/epoch_30.ckpt
+soft target file saved.
+**** EPOCH 031 ****
+----
+mean loss: 0.040949
+accuracy: 0.988742
+eval mean loss: 0.030675
+eval accuracy: 0.992513
+**** EPOCH 032 ****
+----
+mean loss: 0.041144
+accuracy: 0.988594
+eval mean loss: 0.029804
+eval accuracy: 0.992405
+**** EPOCH 033 ****
+----
+mean loss: 0.040969
+accuracy: 0.988318
+eval mean loss: 0.031038
+eval accuracy: 0.992188
+**** EPOCH 034 ****
+----
+mean loss: 0.041258
+accuracy: 0.988723
+eval mean loss: 0.033884
+eval accuracy: 0.991645
+**** EPOCH 035 ****
+----
+mean loss: 0.039035
+accuracy: 0.989387
+eval mean loss: 0.028277
+eval accuracy: 0.993381
+**** EPOCH 036 ****
+----
+mean loss: 0.041699
+accuracy: 0.988410
+eval mean loss: 0.031095
+eval accuracy: 0.992079
+**** EPOCH 037 ****
+----
+mean loss: 0.041636
+accuracy: 0.988208
+eval mean loss: 0.031754
+eval accuracy: 0.992405
+**** EPOCH 038 ****
+----
+mean loss: 0.040853
+accuracy: 0.988871
+eval mean loss: 0.031379
+eval accuracy: 0.992622
+**** EPOCH 039 ****
+----
+mean loss: 0.041290
+accuracy: 0.988779
+eval mean loss: 0.030265
+eval accuracy: 0.992622
+**** EPOCH 040 ****
+----
+mean loss: 0.039706
+accuracy: 0.989000
+eval mean loss: 0.030245
+eval accuracy: 0.992839
+Model saved in file: log/epoch_40.ckpt
+soft target file saved.
+**** EPOCH 041 ****
+----
+mean loss: 0.039055
+accuracy: 0.989405
+eval mean loss: 0.031075
+eval accuracy: 0.992188
+**** EPOCH 042 ****
+----
+mean loss: 0.039963
+accuracy: 0.989000
+eval mean loss: 0.031680
+eval accuracy: 0.991970
+**** EPOCH 043 ****
+----
+mean loss: 0.039232
+accuracy: 0.989387
+eval mean loss: 0.028772
+eval accuracy: 0.993164
+**** EPOCH 044 ****
+----
+mean loss: 0.040773
+accuracy: 0.988466
+eval mean loss: 0.030201
+eval accuracy: 0.993273
+**** EPOCH 045 ****
+----
+mean loss: 0.040989
+accuracy: 0.988834
+eval mean loss: 0.031786
+eval accuracy: 0.991645
+**** EPOCH 046 ****
+----
+mean loss: 0.039670
+accuracy: 0.989184
+eval mean loss: 0.029343
+eval accuracy: 0.993381
+**** EPOCH 047 ****
+----
+mean loss: 0.038817
+accuracy: 0.989350
+eval mean loss: 0.028535
+eval accuracy: 0.993598
+**** EPOCH 048 ****
+----
+mean loss: 0.039379
+accuracy: 0.989442
+eval mean loss: 0.030835
+eval accuracy: 0.992079
+**** EPOCH 049 ****
+----
+mean loss: 0.039109
+accuracy: 0.989147
+eval mean loss: 0.029644
+eval accuracy: 0.993164
+**** EPOCH 050 ****
+----
+mean loss: 0.039220
+accuracy: 0.989332
+eval mean loss: 0.030756
+eval accuracy: 0.992839
+Model saved in file: log/epoch_50.ckpt
+soft target file saved.
+**** EPOCH 051 ****
+----
+mean loss: 0.039625
+accuracy: 0.989368
+eval mean loss: 0.030980
+eval accuracy: 0.992405
+**** EPOCH 052 ****
+----
+mean loss: 0.039254
+accuracy: 0.989313
+eval mean loss: 0.029314
+eval accuracy: 0.993273
+**** EPOCH 053 ****
+----
+mean loss: 0.038369
+accuracy: 0.989755
+eval mean loss: 0.029483
+eval accuracy: 0.993381
+**** EPOCH 054 ****
+----
+mean loss: 0.039785
+accuracy: 0.989018
+eval mean loss: 0.028173
+eval accuracy: 0.993598
+**** EPOCH 055 ****
+----
+mean loss: 0.039490
+accuracy: 0.989645
+eval mean loss: 0.030261
+eval accuracy: 0.992405
+**** EPOCH 056 ****
+----
+mean loss: 0.037094
+accuracy: 0.989829
+eval mean loss: 0.030572
+eval accuracy: 0.993056
+**** EPOCH 057 ****
+----
+mean loss: 0.039083
+accuracy: 0.989074
+eval mean loss: 0.026460
+eval accuracy: 0.993381
+**** EPOCH 058 ****
+----
+mean loss: 0.039517
+accuracy: 0.989608
+eval mean loss: 0.031161
+eval accuracy: 0.992839
+**** EPOCH 059 ****
+----
+mean loss: 0.038583
+accuracy: 0.989037
+eval mean loss: 0.027497
+eval accuracy: 0.994249
+**** EPOCH 060 ****
+----
+mean loss: 0.037765
+accuracy: 0.990198
+eval mean loss: 0.028733
+eval accuracy: 0.992947
+Model saved in file: log/epoch_60.ckpt
+soft target file saved.
+**** EPOCH 061 ****
+----
+mean loss: 0.037533
+accuracy: 0.990161
+eval mean loss: 0.029749
+eval accuracy: 0.992947
+**** EPOCH 062 ****
+----
+mean loss: 0.037982
+accuracy: 0.989184
+eval mean loss: 0.029805
+eval accuracy: 0.992622
+**** EPOCH 063 ****
+----
+mean loss: 0.036839
+accuracy: 0.990234
+eval mean loss: 0.028675
+eval accuracy: 0.993164
+**** EPOCH 064 ****
+----
+mean loss: 0.038048
+accuracy: 0.989829
+eval mean loss: 0.029241
+eval accuracy: 0.992839
+**** EPOCH 065 ****
+----
+mean loss: 0.038030
+accuracy: 0.989589
+eval mean loss: 0.028776
+eval accuracy: 0.993056
+**** EPOCH 066 ****
+----
+mean loss: 0.037582
+accuracy: 0.989424
+eval mean loss: 0.027676
+eval accuracy: 0.993490
+**** EPOCH 067 ****
+----
+mean loss: 0.037675
+accuracy: 0.989442
+eval mean loss: 0.027964
+eval accuracy: 0.993815
+**** EPOCH 068 ****
+----
+mean loss: 0.037159
+accuracy: 0.989866
+eval mean loss: 0.028745
+eval accuracy: 0.993381
+**** EPOCH 069 ****
+----
+mean loss: 0.038281
+accuracy: 0.989442
+eval mean loss: 0.027482
+eval accuracy: 0.992947
+**** EPOCH 070 ****
+----
+mean loss: 0.037220
+accuracy: 0.989847
+eval mean loss: 0.030977
+eval accuracy: 0.992839
+Model saved in file: log/epoch_70.ckpt
+soft target file saved.
+**** EPOCH 071 ****
+----
+mean loss: 0.037201
+accuracy: 0.990013
+eval mean loss: 0.025685
+eval accuracy: 0.994032
+**** EPOCH 072 ****
+----
+mean loss: 0.037281
+accuracy: 0.990124
+eval mean loss: 0.028835
+eval accuracy: 0.993273
+**** EPOCH 073 ****
+----
+mean loss: 0.037098
+accuracy: 0.990069
+eval mean loss: 0.028036
+eval accuracy: 0.993273
+**** EPOCH 074 ****
+----
+mean loss: 0.036909
+accuracy: 0.989718
+eval mean loss: 0.027643
+eval accuracy: 0.993598
+**** EPOCH 075 ****
+----
+mean loss: 0.036749
+accuracy: 0.990327
+eval mean loss: 0.027947
+eval accuracy: 0.993381
+**** EPOCH 076 ****
+----
+mean loss: 0.036089
+accuracy: 0.990050
+eval mean loss: 0.028170
+eval accuracy: 0.993273
+**** EPOCH 077 ****
+----
+mean loss: 0.036568
+accuracy: 0.990363
+eval mean loss: 0.027635
+eval accuracy: 0.992947
+**** EPOCH 078 ****
+----
+mean loss: 0.036359
+accuracy: 0.989995
+eval mean loss: 0.027319
+eval accuracy: 0.994358
+**** EPOCH 079 ****
+----
+mean loss: 0.035333
+accuracy: 0.990290
+eval mean loss: 0.028633
+eval accuracy: 0.993164
+**** EPOCH 080 ****
+----
+mean loss: 0.036505
+accuracy: 0.990308
+eval mean loss: 0.025660
+eval accuracy: 0.994032
+Model saved in file: log/epoch_80.ckpt
+soft target file saved.
+**** EPOCH 081 ****
+----
+mean loss: 0.035660
+accuracy: 0.990234
+eval mean loss: 0.028385
+eval accuracy: 0.993381
+**** EPOCH 082 ****
+----
+mean loss: 0.036038
+accuracy: 0.990290
+eval mean loss: 0.026365
+eval accuracy: 0.993815
+**** EPOCH 083 ****
+----
+mean loss: 0.036493
+accuracy: 0.990437
+eval mean loss: 0.027608
+eval accuracy: 0.993381
+**** EPOCH 084 ****
+----
+mean loss: 0.035536
+accuracy: 0.990327
+eval mean loss: 0.029780
+eval accuracy: 0.992839
+**** EPOCH 085 ****
+----
+mean loss: 0.035710
+accuracy: 0.990271
+eval mean loss: 0.023159
+eval accuracy: 0.994900
+**** EPOCH 086 ****
+----
+mean loss: 0.034450
+accuracy: 0.991229
+eval mean loss: 0.028275
+eval accuracy: 0.993598
+**** EPOCH 087 ****
+----
+mean loss: 0.035570
+accuracy: 0.990419
+eval mean loss: 0.027238
+eval accuracy: 0.993164
+**** EPOCH 088 ****
+----
+mean loss: 0.035711
+accuracy: 0.990511
+eval mean loss: 0.026778
+eval accuracy: 0.993924
+**** EPOCH 089 ****
+----
+mean loss: 0.034863
+accuracy: 0.990658
+eval mean loss: 0.027405
+eval accuracy: 0.993164
+**** EPOCH 090 ****
+----
+mean loss: 0.035351
+accuracy: 0.990234
+eval mean loss: 0.026627
+eval accuracy: 0.993924
+Model saved in file: log/epoch_90.ckpt
+soft target file saved.
+**** EPOCH 091 ****
+----
+mean loss: 0.034235
+accuracy: 0.990621
+eval mean loss: 0.025529
+eval accuracy: 0.993707
+**** EPOCH 092 ****
+----
+mean loss: 0.035418
+accuracy: 0.990124
+eval mean loss: 0.026106
+eval accuracy: 0.994249
+**** EPOCH 093 ****
+----
+mean loss: 0.036133
+accuracy: 0.990308
+eval mean loss: 0.027795
+eval accuracy: 0.993273
+**** EPOCH 094 ****
+----
+mean loss: 0.033178
+accuracy: 0.991156
+eval mean loss: 0.027449
+eval accuracy: 0.992730
+**** EPOCH 095 ****
+----
+mean loss: 0.035720
+accuracy: 0.990198
+eval mean loss: 0.025712
+eval accuracy: 0.994575
+**** EPOCH 096 ****
+----
+mean loss: 0.033225
+accuracy: 0.991119
+eval mean loss: 0.024219
+eval accuracy: 0.993924
+**** EPOCH 097 ****
+----
+mean loss: 0.034734
+accuracy: 0.990879
+eval mean loss: 0.026041
+eval accuracy: 0.993924
+**** EPOCH 098 ****
+----
+mean loss: 0.033413
+accuracy: 0.990677
+eval mean loss: 0.027555
+eval accuracy: 0.992947
+**** EPOCH 099 ****
+----
+mean loss: 0.034014
+accuracy: 0.991156
+eval mean loss: 0.025273
+eval accuracy: 0.994466
+Model saved in file: log/epoch_99.ckpt
+soft target file saved.
